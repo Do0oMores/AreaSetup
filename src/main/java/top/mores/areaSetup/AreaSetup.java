@@ -4,6 +4,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.Objects;
 
 public final class AreaSetup extends JavaPlugin {
     public static FileConfiguration config;
@@ -13,6 +14,7 @@ public final class AreaSetup extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         loadConfig();
+        Objects.requireNonNull(this.getCommand("areatp")).setExecutor(new AreaCommands());
         getLogger().info("Area Setup Enabled");
     }
 

@@ -4,3 +4,7 @@ main: top.mores.areaSetup.AreaSetup
 api-version: '1.18'
 authors: [ Mores ]
 description: 区域设置
+commands:
+  areatp:
+    description: 世界固定传送点随机tp
+    usage: /areatp <WorldName> <Player>
