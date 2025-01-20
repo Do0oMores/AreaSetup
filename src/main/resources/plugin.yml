@@ -1,0 +1,6 @@
+name: AreaSetup
+version: '1.0-SNAPSHOT'
+main: top.mores.areaSetup.AreaSetup
+api-version: '1.18'
+authors: [ Mores ]
+description: 区域设置
