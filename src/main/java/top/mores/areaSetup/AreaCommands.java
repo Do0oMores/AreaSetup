@@ -36,11 +36,10 @@ public class AreaCommands implements CommandExecutor {
                 Location randomLocation = locations.get(new Random().nextInt(locations.size()));
                 target.teleport(randomLocation);
                 sender.sendMessage("Player '" + playerName + "' has been teleported to a random location in world '" + worldName + "'.");
-                return true;
             } else {
                 sender.sendMessage("Usage: /areatp <worldName> <PlayerName>");
-                return true;
             }
+            return true;
         }
 
         if (!(sender instanceof Player)) {

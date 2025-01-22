@@ -1,13 +1,5 @@
 TeleportPoint:
   WorldName:
-    local1:
-      x:
-      y:
-      z:
-    local2:
-      x:
-      y:
-      z:
 SpawnLocation:
   world:
   x:

@@ -41,6 +41,11 @@ public class ConfigHandler {
         config.set("TeleportPoint." + world.getName() + "." + uuid + ".x", loc.getX());
         config.set("TeleportPoint." + world.getName() + "." + uuid + ".y", loc.getY());
         config.set("TeleportPoint." + world.getName() + "." + uuid + ".z", loc.getZ());
+        try{
+            config.save(new File(AreaSetup.getPlugin().getDataFolder(),"config.yml"));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     //删除传送点
@@ -75,5 +80,4 @@ public class ConfigHandler {
         }
         return new Location(Bukkit.getWorld(WorldName), x, y, z);
     }
-
 }
