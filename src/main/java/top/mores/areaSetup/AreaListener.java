@@ -26,11 +26,7 @@ public class AreaListener implements Listener {
         Player p = e.getPlayer();
         String worldName = p.getWorld().getName();
         if (configHandler.getAreaWorlds().contains(worldName)) {
-            Bukkit.getScheduler().runTaskLater(
-                    AreaSetup.getPlugin(),
-                    () -> p.teleport(configHandler.getSpawnLocation()),
-                    20L
-            );
+            e.setRespawnLocation(configHandler.getSpawnLocation());
         }
     }
 
@@ -43,7 +39,7 @@ public class AreaListener implements Listener {
     }
 
     @EventHandler
-        public void onPlayerRespawn(PlayerChangedWorldEvent e) {
+        public void onPlayerChangeWorld(PlayerChangedWorldEvent e) {
         String worldName = e.getFrom().getName();
         Player player = e.getPlayer();
         if (configHandler.getAreaWorlds().contains(worldName)) {
