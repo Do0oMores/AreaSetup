@@ -14,6 +14,7 @@ public final class AreaSetup extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         loadConfig();
+        getServer().getPluginManager().registerEvents(new AreaListener(), this);
         Objects.requireNonNull(this.getCommand("areatp")).setExecutor(new AreaCommands());
         getLogger().info("Area Setup Enabled");
     }

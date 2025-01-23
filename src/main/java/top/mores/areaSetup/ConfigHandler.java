@@ -80,4 +80,9 @@ public class ConfigHandler {
         }
         return new Location(Bukkit.getWorld(WorldName), x, y, z);
     }
+
+    //获取全部世界
+    public List<String> getAreaWorlds() {
+       return config.getStringList("AreaWorlds");
+    }
 }
