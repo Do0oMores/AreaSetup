@@ -85,4 +85,19 @@ public class ConfigHandler {
     public List<String> getAreaWorlds() {
        return config.getStringList("AreaWorlds");
     }
+
+    //获取全部禁止回城的世界
+    public List<String> getDenySpawnWorlds() {
+        return config.getStringList("禁止回城的世界");
+    }
+
+    //使用spawn的方法
+    public void useSpawn(Player player) {
+        String WorldName= Objects.requireNonNull(player.getLocation().getWorld()).getName();
+        if (getDenySpawnWorlds().contains(WorldName)) {
+            player.sendMessage("该世界禁止使用回城指令！");
+        }else {
+            player.teleport(getSpawnLocation());
+        }
+    }
 }

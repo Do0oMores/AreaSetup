@@ -15,9 +15,9 @@ public class AreaCommands implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player) && args.length > 0 && !args[0].equalsIgnoreCase("add")) {
-            // 控制台命令处理
-            if (args.length == 2) {
+        // 控制台命令处理
+        if (!(sender instanceof Player)) {
+            if (label.equalsIgnoreCase("areatp") && args.length == 2) {
                 String worldName = args[0];
                 String playerName = args[1];
                 Player target = Bukkit.getPlayer(playerName);
@@ -42,12 +42,14 @@ public class AreaCommands implements CommandExecutor {
             return true;
         }
 
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("This command can only be used by players.");
+        // 玩家命令处理
+        Player player = (Player) sender;
+
+        if (label.equalsIgnoreCase("spawn")) {
+            // 玩家使用 /spawn 指令回城
+            configHandler.useSpawn(player);
             return true;
         }
-
-        Player player = (Player) sender;
 
         if (!player.hasPermission("areatp.admin")) {
             player.sendMessage("You do not have permission to use this command.");
