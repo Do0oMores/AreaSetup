@@ -41,9 +41,9 @@ public class ConfigHandler {
         config.set("TeleportPoint." + world.getName() + "." + uuid + ".x", loc.getX());
         config.set("TeleportPoint." + world.getName() + "." + uuid + ".y", loc.getY());
         config.set("TeleportPoint." + world.getName() + "." + uuid + ".z", loc.getZ());
-        try{
-            config.save(new File(AreaSetup.getPlugin().getDataFolder(),"config.yml"));
-        }catch (IOException e){
+        try {
+            config.save(new File(AreaSetup.getPlugin().getDataFolder(), "config.yml"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -83,8 +83,13 @@ public class ConfigHandler {
 
     //获取全部世界
     public List<String> getAreaWorlds() {
-       return config.getStringList("AreaWorlds");
+        return config.getStringList("AreaWorlds");
     }
+
+    public List<String> getRespawnWorlds(){
+        return config.getStringList("死亡后重设重生点的世界");
+    }
+
 
     //获取全部禁止回城的世界
     public List<String> getDenySpawnWorlds() {
@@ -93,10 +98,10 @@ public class ConfigHandler {
 
     //使用spawn的方法
     public void useSpawn(Player player) {
-        String WorldName= Objects.requireNonNull(player.getLocation().getWorld()).getName();
+        String WorldName = Objects.requireNonNull(player.getLocation().getWorld()).getName();
         if (getDenySpawnWorlds().contains(WorldName)) {
             player.sendMessage("该世界禁止使用回城指令！");
-        }else {
+        } else {
             player.teleport(getSpawnLocation());
         }
     }

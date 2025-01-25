@@ -1,6 +1,5 @@
-TeleportPoint:
-  WorldName:
 AreaWorlds:
+死亡后重设重生点的世界:
 SpawnLocation:
   world:
   x:
@@ -8,3 +7,5 @@ SpawnLocation:
   z:
 禁止回城的世界:
   -
+TeleportPoint:
+  WorldName:

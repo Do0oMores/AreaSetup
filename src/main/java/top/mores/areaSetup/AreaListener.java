@@ -17,7 +17,7 @@ import org.bukkit.scoreboard.Team;
 import java.util.Objects;
 
 public class AreaListener implements Listener {
-    private final ConfigHandler configHandler=new ConfigHandler();
+    private final ConfigHandler configHandler = new ConfigHandler();
     private final Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
     private final String TEAM_NAME = "HiddenID";
 
@@ -25,7 +25,7 @@ public class AreaListener implements Listener {
     public void onPlayerSpawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
         String worldName = p.getWorld().getName();
-        if (configHandler.getAreaWorlds().contains(worldName)) {
+        if (configHandler.getRespawnWorlds().contains(worldName)) {
             e.setRespawnLocation(configHandler.getSpawnLocation());
         }
     }
@@ -39,7 +39,7 @@ public class AreaListener implements Listener {
     }
 
     @EventHandler
-        public void onPlayerChangeWorld(PlayerChangedWorldEvent e) {
+    public void onPlayerChangeWorld(PlayerChangedWorldEvent e) {
         String worldName = e.getFrom().getName();
         Player player = e.getPlayer();
         if (configHandler.getAreaWorlds().contains(worldName)) {
