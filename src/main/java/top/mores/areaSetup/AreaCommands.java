@@ -16,7 +16,7 @@ public class AreaCommands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // 控制台命令处理
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             if (label.equalsIgnoreCase("areatp") && args.length == 2) {
                 String worldName = args[0];
                 String playerName = args[1];
@@ -41,9 +41,6 @@ public class AreaCommands implements CommandExecutor {
             }
             return true;
         }
-
-        // 玩家命令处理
-        Player player = (Player) sender;
 
         if (label.equalsIgnoreCase("spawn")) {
             // 玩家使用 /spawn 指令回城

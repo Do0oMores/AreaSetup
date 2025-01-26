@@ -1,6 +1,7 @@
 package top.mores.areaSetup;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,13 +9,11 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class ConfigHandler {
     FileConfiguration config = AreaSetup.getPlugin().getConfig();
+    public static Set<Player> teleportingPlayers = new HashSet<>();
 
     //根据世界获取所有传送点
     public List<Location> getAllTeleportLocationsByWorldName(String worldName) {
@@ -102,7 +101,24 @@ public class ConfigHandler {
         if (getDenySpawnWorlds().contains(WorldName)) {
             player.sendMessage("该世界禁止使用回城指令！");
         } else {
-            player.teleport(getSpawnLocation());
+            player.sendMessage(ChatColor.GREEN +"正在引导传送...请不要移动...");
+            teleportingPlayers.add(player);
+            startTeleportCountdown(player);
         }
+    }
+
+    private void startTeleportCountdown(Player player) {
+        // 记录玩家初始位置，判断是否移动
+        Location initialLocation = player.getLocation();
+        Bukkit.getScheduler().runTaskLater(AreaSetup.getPlugin(), () -> {
+            // 检查玩家是否移动
+            if (player.getLocation().distance(initialLocation) > 0) {
+                player.sendMessage("回城传送已取消！");
+            } else {
+                player.teleport(getSpawnLocation());
+                player.sendMessage("回城成功！");
+                teleportingPlayers.remove(player);
+            }
+        }, 5 * 20L); // 延迟5秒
     }
 }
