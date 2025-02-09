@@ -13,7 +13,6 @@ import java.util.*;
 
 public class ConfigHandler {
     FileConfiguration config = AreaSetup.getPlugin().getConfig();
-    public static Set<Player> teleportingPlayers = new HashSet<>();
 
     //根据世界获取所有传送点
     public List<Location> getAllTeleportLocationsByWorldName(String worldName) {
@@ -102,7 +101,6 @@ public class ConfigHandler {
             player.sendMessage("该世界禁止使用回城指令！");
         } else {
             player.sendMessage(ChatColor.GREEN +"正在引导传送...请不要移动...");
-            teleportingPlayers.add(player);
             startTeleportCountdown(player);
         }
     }
@@ -113,11 +111,10 @@ public class ConfigHandler {
         Bukkit.getScheduler().runTaskLater(AreaSetup.getPlugin(), () -> {
             // 检查玩家是否移动
             if (player.getLocation().distance(initialLocation) > 0) {
-                player.sendMessage("回城传送已取消！");
+                player.sendMessage(ChatColor.RED+"回城传送已取消！");
             } else {
                 player.teleport(getSpawnLocation());
-                player.sendMessage("回城成功！");
-                teleportingPlayers.remove(player);
+                player.sendMessage(ChatColor.GREEN+"已传送！");
             }
         }, 5 * 20L); // 延迟5秒
     }

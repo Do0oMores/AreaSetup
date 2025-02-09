@@ -1,7 +1,6 @@
 package top.mores.areaSetup;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -10,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scoreboard.Scoreboard;
@@ -74,15 +72,6 @@ public class AreaListener implements Listener {
             if (currentHealth != maxHealth) {
                 livingEntity.setHealth(maxHealth);
             }
-        }
-    }
-
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent e) {
-        Player player = e.getPlayer();
-        if (ConfigHandler.teleportingPlayers.contains(player)) {
-            ConfigHandler.teleportingPlayers.remove(player);
-            player.sendMessage(ChatColor.RED +"传送已取消");
         }
     }
 }
